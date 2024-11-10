@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book Search Results</title>
+</head>
+<body>
+    <h1>Search Results</h1>
+    <div class="card-container" th:if="${not #lists.isEmpty(books)}">
+        <div class="card" th:each="book : ${books}">
+            <h2 th:text="${book.title}">Book Title</h2>
+            <p><strong>Author:</strong> <span th:text="${book.author.name}">Author Name</span></p>
+            <p><strong>Publisher:</strong> <span th:text="${book.publisher.name}">Publisher Name</span></p>
+            <p><strong>Description:</strong> <span th:text="${book.bookDetails.description}">Description</span></p>
+            <p><strong>Pages:</strong> <span th:text="${book.bookDetails.pages}">Number of Pages</span></p>
+            <p><strong>Genres:</strong>
+                <span th:each="genre : ${book.genres}" th:text="${genre.name} + ', '"></span>
+            </p>
+        </div>
+        <!-- Add more styling or layout as needed -->
+    </div>
+    <div th:if="${#lists.isEmpty(books)}">
+        <p>No books found for the author: <span th:text="${author}">Author Name</span></p>
+    </div>
+</body>
+</html>
